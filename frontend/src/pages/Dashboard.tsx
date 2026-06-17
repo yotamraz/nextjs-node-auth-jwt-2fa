@@ -28,7 +28,7 @@ export default function Dashboard() {
     if (accessToken) fetchUser();
   }, [accessToken]);
 
-  if (loading || !accessToken) return null;
+  if (loading || !accessToken || name === null) return null;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
