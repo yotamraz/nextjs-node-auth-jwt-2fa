@@ -67,6 +67,7 @@ def signup(body: SignupRequest, db: Session = Depends(get_db)):
         password_hash=hash_password(body.password),
     )
     db.add(user)
+    db.flush()
 
     access_token = create_access_token(user.id)
     refresh_token = create_refresh_token(user.id)
