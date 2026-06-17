@@ -1,46 +1,72 @@
-# Next.js + Node.js Authentication System (JWT + 2FA)
+# Python + React Authentication System (JWT + 2FA)
 
 This project implements a complete authentication flow using:
 
-- ✅ **JWT access + refresh tokens**
-- 🔐 **Two-Factor Authentication (2FA)** with TOTP & QR codes
-- 🍪 **Secure cookie-based refresh token handling**
-- 🧠 **React Context for client-side token management**
-- 🔁 **Proxy API routes in Next.js**
-- ⚠️ **Middleware for route protection**
-- 🧩 Built with: **Next.js 15 (App Router)**, **Node.js**, **Express**, **PostgreSQL**, **Prisma**, and **Tailwind CSS**
+- **JWT access + refresh tokens**
+- **Two-Factor Authentication (2FA)** with TOTP & QR codes
+- **Secure cookie-based refresh token handling**
+- **React Context for client-side token management**
+- **Route protection** via React Router
 
 ---
 
-## 📦 Stack
+## Stack
 
-| Part     | Tech                                 |
-| -------- | ------------------------------------ |
-| Frontend | Next.js (App Router), Tailwind CSS   |
-| Backend  | Node.js, Express, TypeScript         |
-| Auth     | JWT (access + refresh), otplib (2FA) |
-| DB       | PostgreSQL, Prisma ORM               |
+| Part     | Tech                                          |
+| -------- | --------------------------------------------- |
+| Frontend | React 19, React Router, Vite, Tailwind CSS    |
+| Backend  | Python 3.12, FastAPI, SQLAlchemy, SQLite       |
+| Auth     | PyJWT (access + refresh), pyotp (2FA/TOTP)    |
 
 ---
 
-## 🧪 Features
+## Features
 
 - Signup & Login with JWT
 - Access token stored in memory
 - Refresh token stored in HttpOnly cookie
-- 2FA (opt-in) with OTP QR code via otplib
-- Protected routes via middleware and React Context
+- 2FA (opt-in) with OTP QR code via pyotp
+- Protected routes via React Router and Auth Context
 - Password reset (with token, no email service)
 
 ---
 
-## 🚀 Clone this repo
+## Getting Started
+
+### Prerequisites
+
+- Python 3.12+
+- Node.js 18+
+
+### Backend Setup
 
 ```bash
-git clone https://github.com/yourname/nextjs-node-auth-jwt-2fa
-cd nextjs-node-auth-jwt-2fa
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run.py
 ```
 
-📹 Video Tutorial
+The backend runs on `http://localhost:5002`.
 
-🔗 [Watch on YouTube](https://youtu.be/H8RxNj492PY?si=yalALRRp2uHGptwO) – Full walkthrough of this project
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend runs on `http://localhost:5173`.
+
+---
+
+## Architecture
+
+The frontend (React/Vite) communicates directly with the Python FastAPI backend.
+CORS is configured to allow the frontend origin with credentials support.
+
+```
+React (Vite :5173) ──HTTP──> FastAPI (:5002) ──SQLAlchemy──> SQLite
+```
